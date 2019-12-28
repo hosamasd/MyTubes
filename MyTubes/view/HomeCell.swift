@@ -19,10 +19,10 @@ class HomeCell: BaseCell {
             let urlString2 = video.channel.profileImageName
             guard let url2 = URL(string: urlString2) else { return  }
             smallImageView.sd_setImage(with: url2)
-            titleLabel.text = video.channel.name
-            
-            discriptionLabel.text = video.title
-            
+//            titleLabel.text = video.channel.name
+//            discriptionLabel.text = video.title
+            titleLabel.text = video.title
+            discriptionLabel.text = video.channel.name
             
         }
     }
@@ -42,7 +42,7 @@ class HomeCell: BaseCell {
         i.clipsToBounds = true
         return i
     }()
-    let titleLabel = UILabel(text: "", font: .systemFont(ofSize: 20), textColor: .black)
+    let titleLabel = UILabel(text: "", font: .systemFont(ofSize: 20), textColor: .black,textAlignment: .left,numberOfLines: 2)
     let discriptionLabel = UILabel(text: "", font: .systemFont(ofSize: 14), textColor: .lightGray,textAlignment: .left,numberOfLines: 2)
     let seperatorView:UIView = {
        let s = UIView(backgroundColor: .lightGray)
@@ -56,7 +56,7 @@ class HomeCell: BaseCell {
         
        addSubview(seperatorView)
         let labels = stack(titleLabel,discriptionLabel)
-        let bottom = hstack(smallImageView,labels,spacing: 16,alignment:.center).padTop(-16)
+        let bottom = hstack(smallImageView,labels,spacing: 16,alignment:.center).padTop(-8)
 //        bottom.constrainHeight(constant: 80)
         stack(homeImageView,bottom)
         homeImageView.heightAnchor.constraint(lessThanOrEqualTo: widthAnchor, multiplier: 0.8).isActive = true

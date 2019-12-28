@@ -8,10 +8,23 @@
 
 import UIKit
 
-class MenuBarView: UIView,UICollectionViewDelegateFlowLayout    {
+protocol MenuBarViewProtocol {
+    func didTapCell(index:Int)
+}
+
+class MenuBarView: UIView    {
+    
+    var delgate:MenuBarViewProtocol? 
     
     let cellID = "cellID"
     let menuImageArray = [#imageLiteral(resourceName: "home"),#imageLiteral(resourceName: "trending"),#imageLiteral(resourceName: "subscriptions"),#imageLiteral(resourceName: "account")]
+    let horizentalBarView:UIView = {
+       let v = UIView(backgroundColor: UIColor(white: 0.9, alpha: 1))
+        v.constrainHeight(constant: 3)
+        v.translatesAutoresizingMaskIntoConstraints = false
+        return v
+    }()
+    var leftHorizentalBarViewConstraint:NSLayoutConstraint!
     
     
     lazy var collectionView:UICollectionView = {
@@ -31,11 +44,19 @@ class MenuBarView: UIView,UICollectionViewDelegateFlowLayout    {
         
 //        let selectedPath = IndexPath(item: 0, section: 0)
 //        collectionView.selectItem(at: selectedPath, animated: true, scrollPosition: .right)
-//        setupHorizentalBar()
+        setupHorizentalBar()
     }
     
     
-   
+    func setupHorizentalBar()  {
+        addSubview(horizentalBarView)
+        
+        
+      leftHorizentalBarViewConstraint =   horizentalBarView.leadingAnchor.constraint(equalTo: leadingAnchor)
+        leftHorizentalBarViewConstraint.isActive = true
+        horizentalBarView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        horizentalBarView.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, multiplier: 1/4).isActive = true
+    }
     
     func setupViews()  {
         addSubview(collectionView)
@@ -56,7 +77,7 @@ class MenuBarView: UIView,UICollectionViewDelegateFlowLayout    {
     }
 }
 
-extension MenuBarView: UICollectionViewDelegate ,UICollectionViewDataSource{
+extension MenuBarView: UICollectionViewDelegate ,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
@@ -68,6 +89,15 @@ extension MenuBarView: UICollectionViewDelegate ,UICollectionViewDataSource{
         
         cell.image =  image
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let x = CGFloat(indexPath.item) * frame.width / 4
+        leftHorizentalBarViewConstraint.constant = x
+        delgate?.didTapCell(index: indexPath.item)
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
+            self.layoutIfNeeded()
+        })
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
