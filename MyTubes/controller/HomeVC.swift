@@ -12,6 +12,8 @@ class HomeVC: BaseVC {
     
      fileprivate let cellId = "cellId"
     var homeVideoArray = [VideoModel]()
+    var homeSubscribtionArray = [VideoModel]()
+    var homeTrendingArray = [VideoModel]()
     
     lazy var menuBar:MenuBarView = {
         let me = MenuBarView()
@@ -19,6 +21,13 @@ class HomeVC: BaseVC {
 //        me.isUserInteractionEnabled = true
         me.constrainHeight(constant: 50)
         return me
+    }()
+    let activityIndicatorView: UIActivityIndicatorView = {
+        let ac  = UIActivityIndicatorView(style: .whiteLarge)
+        ac.color = .black
+        ac.startAnimating()
+        //        aiv.hidesWhenStopped = true
+        return ac
     }()
     
     lazy var settingg:MoreSettingView = {
@@ -48,11 +57,17 @@ class HomeVC: BaseVC {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! HomesCell
         
+        if indexPath.item == 0 {
+            cell.feedCollection.videoArray = homeVideoArray
+        }else if indexPath.item == 1 {
+            cell.feedCollection.videoArray = homeSubscribtionArray
+        }else if indexPath.item == 2 {
+            cell.feedCollection.videoArray = homeTrendingArray
+        }else {
+        
         cell.feedCollection.videoArray = homeVideoArray
+        }
         cell.feedCollection.collectionView.reloadData()
-//        let video = homeVideoArray[indexPath.item]
-//
-//        cell.video = video
         return cell
     }
     
@@ -95,55 +110,40 @@ class HomeVC: BaseVC {
         let dispatchGroup = DispatchGroup()
         
         dispatchGroup.enter()
-         APIServices.shared.getSharedAPIFromUrl { (videos, err) in
+        APIServices.shared.getApiData(completion: { (videos, err) in
+            dispatchGroup.leave()
+            group1 = videos
+        })
+        
+        dispatchGroup.enter()
+        
+        APIServices.shared.getApiDataFromTrnding(completion: { (videos, err) in
             dispatchGroup.leave()
             group2 = videos
-        }
+        })
         
         dispatchGroup.enter()
-        
-        Services.shared.fetchAppGroups { (apps, err) in
+        APIServices.shared.getApiDataFromSubscription(completion: { (videos, err) in
             dispatchGroup.leave()
-            group3 = apps
-        }
+            group3 = videos
+        })
         
-        dispatchGroup.enter()
-        Services.shared.fetchTopGrossing { (apps, err) in
-            dispatchGroup.leave()
-            group1 = apps
-        }
-        
-        dispatchGroup.enter()
-        Services.shared.fetchSocialApps { (social, err) in
-            dispatchGroup.leave()
-            self.groupsSocial = social ?? []
-        }
+       
         
         dispatchGroup.notify(queue: .main) {
             
             self.activityIndicatorView.stopAnimating()
             
             if let group = group3 {
-                self.groups.append(group)
+                self.homeSubscribtionArray=group
             }
             if let group = group1 {
-                self.groups.append(group)
+                self.homeVideoArray=group
             }
             if let group = group2 {
-                self.groups.append(group)
+                self.homeTrendingArray=group
             }
             self.collectionView.reloadData()
-        }
-        
-       
-            if let err=err{
-                print(err.localizedDescription);return
-            }
-            guard let videos = videos else {return}
-            self.homeVideoArray = videos
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
         }
     }
     
@@ -172,6 +172,10 @@ class HomeVC: BaseVC {
     }
     
     override func setupCollection() {
+        
+        view.addSubview(activityIndicatorView)
+        activityIndicatorView.fillSuperview()
+        
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
             layout.minimumLineSpacing = 0
