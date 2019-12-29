@@ -391,6 +391,23 @@ extension Int {
     var factorial: Int {
         return (1..<self+1).reduce(1, *)
     }
+    
+    func timeString(time: TimeInterval) -> String {
+        let hour = Int(time) / 3600
+        let minute = Int(time) / 60 % 60
+        let second = Int(time) % 60
+        
+        // return formated string
+        return String(format: "%02i:%02i:%02i", hour, minute, second)
+    }
+    
+    func timeMintueString(time: TimeInterval) -> String {
+        let minute = Int(time) / 60 % 60
+        let second = Int(time) % 60
+        
+        // return formated string
+        return String(format: "%02i:%02i",  minute, second)
+    }
 }
 
 extension NSAttributedString {

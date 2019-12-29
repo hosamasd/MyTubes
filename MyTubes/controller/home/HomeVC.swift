@@ -68,6 +68,12 @@ class HomeVC: BaseVC {
         cell.feedCollection.videoArray = homeVideoArray
         }
         cell.feedCollection.collectionView.reloadData()
+        
+        cell.feedCollection.handleSelected = {[weak self] (video) in
+            let video = VideoLauncher()
+            video.showVideoPlayer()
+        }
+        
         return cell
     }
     

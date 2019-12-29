@@ -28,7 +28,6 @@ class APIServices {
     }
     
     func getSharedAPIFromUrl(urlString:String,completion: @escaping ([VideoModel]?,Error?)->()) {
-//        let urlString = "\(baseUrls)home.json"
         
         guard let baseUrl = URL(string: urlString) else{
             return}

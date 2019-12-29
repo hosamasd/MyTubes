@@ -12,6 +12,7 @@ class FeedCollectionVC: BaseVC {
     
     fileprivate let cellId = "cellId"
     var videoArray = [VideoModel]()
+    var handleSelected:((VideoModel)->())?
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -26,12 +27,17 @@ class FeedCollectionVC: BaseVC {
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+         let video = videoArray[indexPath.item]
+        handleSelected?(video)
+    }
     
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            let height = view.frame.width - 32
     
-            return .init(width: height, height: height  )
-        }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height = view.frame.width - 32
+        
+        return .init(width: height, height: height  )
+    }
     
     override func setupCollection() {
         collectionView.backgroundColor = .white

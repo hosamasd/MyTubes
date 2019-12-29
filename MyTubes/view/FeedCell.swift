@@ -23,6 +23,9 @@ class FeedCell: BaseCell {
 //            discriptionLabel.text = video.title
             titleLabel.text = video.title
             discriptionLabel.text = video.channel.name
+            let time = video.duration
+            let timeToDisplay = time.timeMintueString(time: TimeInterval(time))
+            durationLabel.text = "\(timeToDisplay)"
             
         }
     }
@@ -44,12 +47,20 @@ class FeedCell: BaseCell {
     }()
     let titleLabel = UILabel(text: "", font: .systemFont(ofSize: 20), textColor: .black,textAlignment: .left,numberOfLines: 2)
     let discriptionLabel = UILabel(text: "", font: .systemFont(ofSize: 14), textColor: .lightGray,textAlignment: .left,numberOfLines: 2)
+    let durationLabel = UILabel(text: "00:30", font: .systemFont(ofSize: 18), textColor: .white)
     let seperatorView:UIView = {
        let s = UIView(backgroundColor: .lightGray)
         s.constrainHeight(constant: 0.5)
         return s
     }()
-    
+    let durationView:UIView = {
+        let s = UIView(backgroundColor: .black)
+        s.constrainHeight(constant: 40)
+        s.constrainWidth(constant: 55)
+        s.layer.cornerRadius = 8
+        s.clipsToBounds = true
+        return s
+    }()
     
     override func setupViews() {
         backgroundColor = .white
@@ -60,6 +71,11 @@ class FeedCell: BaseCell {
 //        bottom.constrainHeight(constant: 80)
         stack(homeImageView,bottom)
         homeImageView.heightAnchor.constraint(lessThanOrEqualTo: widthAnchor, multiplier: 0.8).isActive = true
+       homeImageView.addSubview(durationView)
+        durationView.addSubview(durationLabel)
+        
+        durationView.anchor(top: nil, leading: nil, bottom: homeImageView.bottomAnchor, trailing: trailingAnchor,padding: .init(top: 0, left: 0, bottom: 16, right: 16))
+        durationLabel.centerInSuperview()
         seperatorView.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
     }
 }
