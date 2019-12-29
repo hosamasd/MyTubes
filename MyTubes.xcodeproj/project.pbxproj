@@ -16,7 +16,7 @@
 		4E8E018323B7493D009F3299 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8E018223B7493D009F3299 /* BaseVC.swift */; };
 		4E8E018523B749A5009F3299 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8E018423B749A5009F3299 /* HomeVC.swift */; };
 		4E8E018723B74A4A009F3299 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8E018623B74A4A009F3299 /* BaseCell.swift */; };
-		4E8E018923B74A78009F3299 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8E018823B74A78009F3299 /* HomeCell.swift */; };
+		4E8E018923B74A78009F3299 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8E018823B74A78009F3299 /* FeedCell.swift */; };
 		4E93425023B77587000F5561 /* MoreSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E93424F23B77587000F5561 /* MoreSettingView.swift */; };
 		4E93425223B776BC000F5561 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E93425123B776BC000F5561 /* SettingCell.swift */; };
 		4E93425423B77751000F5561 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E93425323B77751000F5561 /* SettingModel.swift */; };
@@ -26,6 +26,8 @@
 		4EAADCFA23B769D600875350 /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAADCF923B769D600875350 /* APIServices.swift */; };
 		4EAC2D1C23B758F90088F117 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC2D1B23B758F90088F117 /* MenuBarView.swift */; };
 		4EAC2D1F23B759F80088F117 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC2D1E23B759F80088F117 /* MenuCell.swift */; };
+		4ED4667A23B8786A001C4439 /* HomesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED4667923B8786A001C4439 /* HomesCell.swift */; };
+		4ED4667C23B878BE001C4439 /* FeedCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED4667B23B878BE001C4439 /* FeedCollectionVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +41,7 @@
 		4E8E018223B7493D009F3299 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		4E8E018423B749A5009F3299 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		4E8E018623B74A4A009F3299 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
-		4E8E018823B74A78009F3299 /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
+		4E8E018823B74A78009F3299 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		4E93424F23B77587000F5561 /* MoreSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreSettingView.swift; sourceTree = "<group>"; };
 		4E93425123B776BC000F5561 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		4E93425323B77751000F5561 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
@@ -49,6 +51,8 @@
 		4EAADCF923B769D600875350 /* APIServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServices.swift; sourceTree = "<group>"; };
 		4EAC2D1B23B758F90088F117 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 		4EAC2D1E23B759F80088F117 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		4ED4667923B8786A001C4439 /* HomesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomesCell.swift; sourceTree = "<group>"; };
+		4ED4667B23B878BE001C4439 /* FeedCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionVC.swift; sourceTree = "<group>"; };
 		CCBC6FDAC102AF3DE59F7DEF /* Pods-MyTubes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTubes.release.xcconfig"; path = "Target Support Files/Pods-MyTubes/Pods-MyTubes.release.xcconfig"; sourceTree = "<group>"; };
 		E2E2EBC2D85457FB70F71FA4 /* Pods-MyTubes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTubes.debug.xcconfig"; path = "Target Support Files/Pods-MyTubes/Pods-MyTubes.debug.xcconfig"; sourceTree = "<group>"; };
 		E3A13B64887218AF6FF298BC /* Pods_MyTubes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTubes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,6 +118,7 @@
 			children = (
 				4E8E018223B7493D009F3299 /* BaseVC.swift */,
 				4E8E018423B749A5009F3299 /* HomeVC.swift */,
+				4ED4667B23B878BE001C4439 /* FeedCollectionVC.swift */,
 				4E93425723B77E6F000F5561 /* FeedbackVC.swift */,
 			);
 			path = controller;
@@ -124,7 +129,8 @@
 			children = (
 				4EAC2D1D23B759320088F117 /* custom */,
 				4E8E018623B74A4A009F3299 /* BaseCell.swift */,
-				4E8E018823B74A78009F3299 /* HomeCell.swift */,
+				4E8E018823B74A78009F3299 /* FeedCell.swift */,
+				4ED4667923B8786A001C4439 /* HomesCell.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -307,10 +313,12 @@
 				4EAADCF523B767E100875350 /* VideoModel.swift in Sources */,
 				4E93425223B776BC000F5561 /* SettingCell.swift in Sources */,
 				4E8E018723B74A4A009F3299 /* BaseCell.swift in Sources */,
-				4E8E018923B74A78009F3299 /* HomeCell.swift in Sources */,
+				4E8E018923B74A78009F3299 /* FeedCell.swift in Sources */,
 				4EAADCF723B768B200875350 /* ChannelModel.swift in Sources */,
 				4E93425823B77E6F000F5561 /* FeedbackVC.swift in Sources */,
+				4ED4667C23B878BE001C4439 /* FeedCollectionVC.swift in Sources */,
 				4EAC2D1F23B759F80088F117 /* MenuCell.swift in Sources */,
+				4ED4667A23B8786A001C4439 /* HomesCell.swift in Sources */,
 				4E93425423B77751000F5561 /* SettingModel.swift in Sources */,
 				4E8E018323B7493D009F3299 /* BaseVC.swift in Sources */,
 			);

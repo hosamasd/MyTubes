@@ -8,7 +8,7 @@
 
 import UIKit
 import SDWebImage
-class HomeCell: BaseCell {
+class FeedCell: BaseCell {
     
     var video:VideoModel! {
         didSet{

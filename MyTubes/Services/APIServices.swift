@@ -13,9 +13,29 @@ class APIServices {
     let baseUrls = "https://s3-us-west-2.amazonaws.com/youtubeassets/"
     static let shared = APIServices()
     
+    func getApiData(completion:@escaping ([VideoModel],Error?)->())  {
+        
+        getSharedAPIFromUrl(urlString: "\(baseUrls)home.json") { (videos) in
+            completion(videos)
+        }
+    }
     
-    func getSharedAPIFromUrl(completion: @escaping ([VideoModel]?,Error?)->()) {
-        let urlString = "\(baseUrls)home.json"
+    func getApiDataFromTrnding(completion:@escaping ([VideoModel],Error?)->())  {
+        
+        getSharedAPIFromUrl(urlString: "\(baseUrls)trending.json") { (videos) in
+            completion(videos)
+        }
+    }
+    
+    func getApiDataFromSubscription(completion:@escaping ([VideoModel],Error?)->())  {
+        getSharedAPIFromUrl(urlString: "\(baseUrls)subscriptions.json") { (videos) in
+            completion(videos)
+        }
+        
+    }
+    
+    func getSharedAPIFromUrl(urlString:String,completion: @escaping ([VideoModel]?,Error?)->()) {
+//        let urlString = "\(baseUrls)home.json"
         
         guard let baseUrl = URL(string: urlString) else{
             return}

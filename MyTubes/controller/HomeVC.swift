@@ -46,29 +46,33 @@ class HomeVC: BaseVC {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) //as! HomeCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! HomesCell
+        
+        cell.feedCollection.videoArray = homeVideoArray
+        cell.feedCollection.collectionView.reloadData()
 //        let video = homeVideoArray[indexPath.item]
 //
 //        cell.video = video
-        let colors:[UIColor] = [.red,.blue,.brown,.green]
-        
-        cell.backgroundColor = colors[indexPath.item]
         return cell
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let x = scrollView.contentOffset.x / 4
         menuBar.leftHorizentalBarViewConstraint.constant = x
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: view.frame.width, height: view.frame.height)
+        return .init(width: view.frame.width, height: view.frame.height - 50)
     }
     
     func scrollToSpecificIndex(indexNumber:Int)  {
         let index = IndexPath(item: indexNumber, section: 0)
         
         collectionView.scrollToItem(at: index, at: .right, animated: true)
+        if let titleLabel = navigationItem.titleView as? UILabel {
+            titleLabel.text = "     \(titlesName[indexNumber])"
+        }
     }
     
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -77,10 +81,61 @@ class HomeVC: BaseVC {
         let index = IndexPath(item: Int(item), section: 0)
         menuBar.collectionView.selectItem(at: index, animated: true, scrollPosition: .right)
         
+        if let titleLabel = navigationItem.titleView as? UILabel {
+            titleLabel.text = titlesName[Int(item)]
+        }
     }
     
     func fetchVideos()  {
-        APIServices.shared.getSharedAPIFromUrl { (videos, err) in
+        
+        var group1: [VideoModel]?
+        var group2: [VideoModel]?
+        var group3: [VideoModel]?
+        //to sync data that can be fetched
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
+         APIServices.shared.getSharedAPIFromUrl { (videos, err) in
+            dispatchGroup.leave()
+            group2 = videos
+        }
+        
+        dispatchGroup.enter()
+        
+        Services.shared.fetchAppGroups { (apps, err) in
+            dispatchGroup.leave()
+            group3 = apps
+        }
+        
+        dispatchGroup.enter()
+        Services.shared.fetchTopGrossing { (apps, err) in
+            dispatchGroup.leave()
+            group1 = apps
+        }
+        
+        dispatchGroup.enter()
+        Services.shared.fetchSocialApps { (social, err) in
+            dispatchGroup.leave()
+            self.groupsSocial = social ?? []
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            
+            self.activityIndicatorView.stopAnimating()
+            
+            if let group = group3 {
+                self.groups.append(group)
+            }
+            if let group = group1 {
+                self.groups.append(group)
+            }
+            if let group = group2 {
+                self.groups.append(group)
+            }
+            self.collectionView.reloadData()
+        }
+        
+       
             if let err=err{
                 print(err.localizedDescription);return
             }
@@ -95,7 +150,7 @@ class HomeVC: BaseVC {
     override func setupNavigation() {
         navigationController?.hidesBarsOnSwipe = true
         let   titleLabs = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height))
-        titleLabs.text = " Home"
+        titleLabs.text = "      Home"
         titleLabs.font = UIFont.boldSystemFont(ofSize: 20)
         titleLabs.textColor = .white
         navigationItem.titleView = titleLabs
@@ -122,18 +177,13 @@ class HomeVC: BaseVC {
             layout.minimumLineSpacing = 0
         }
         collectionView.backgroundColor = .white
-        collectionView.contentInset = .init(top: 66, left: 16, bottom: 16, right: 16)
+//        collectionView.contentInset = .init(top: 66, left: 16, bottom: 16, right: 16)
         
-//        collectionView.register(HomeCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+       
+        collectionView.register(HomesCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.isPagingEnabled = true
     }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let height = view.frame.width - 32
-//
-//        return .init(width: height, height: height  )
-//    }
     
    @objc func handleMore()  {
         settingg.showSetting()
