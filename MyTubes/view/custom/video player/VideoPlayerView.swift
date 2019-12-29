@@ -11,6 +11,13 @@ import AVKit
 
 class VideoPlayerView: UIView {
     
+    var video :VideoModel? {
+        didSet {
+            setupPalyervIEW()
+        }
+    }
+    
+    
     var isPlayed:Bool = true
     var avPlayer:AVPlayer?
     
@@ -64,16 +71,17 @@ class VideoPlayerView: UIView {
         sl.addTarget(self, action: #selector(handleVideoPlaying), for: .valueChanged)
         return sl
     }()
-    
+    let titleLabel = UILabel(text: "", font: .systemFont(ofSize: 20), textColor: .black)
+     let numberOfViewsLabel = UILabel(text: "", font: .systemFont(ofSize: 18), textColor: .lightGray)
     
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupPalyervIEW()
+//        setupPalyervIEW()
         
         backgroundColor = .black
         
-        addViews()
+        setupViews()
         addGradiantLayer()
     }
     
@@ -85,7 +93,7 @@ class VideoPlayerView: UIView {
         mainContainerView.layer.addSublayer(gradiantLayer)
     }
     
-    func addViews()  {
+    func setupViews()  {
         addSubview(mainContainerView)
         
         mainContainerView.addSubViews(views: activyIndicators,playeutton,videlLenghtLabel,sliderTimer,videoStarterLabel)
@@ -97,14 +105,6 @@ class VideoPlayerView: UIView {
         
         playeutton.centerInSuperview()
         activyIndicators.centerInSuperview()
-//        playeutton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-//        playeutton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-//        playeutton.widthAnchor.constraint(equalToConstant: 50).isActive = true
-//        playeutton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-//        activyIndicators.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-//        activyIndicators.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-//        mainContainerView.frame = frame
     }
     
     func setupPalyervIEW()  {
@@ -117,6 +117,7 @@ class VideoPlayerView: UIView {
 //        guard let url = URL(string: "https://firebasestorage.googleapis.com/v0/b/gameofchats-762ca.appspot.com/o/message_movies%2F12323439-9729-4941-BA07-2BAE970967C7.mov?alt=media&token=3e37a093-3bc8-410f-84d3-38332af9c726") else { return }
 //
 //        avPlayer = AVPlayer(url: url)
+        
         let videoPlayers = AVPlayerLayer(player: avPlayer)
         self.layer.addSublayer(videoPlayers)
         videoPlayers.frame = self.frame

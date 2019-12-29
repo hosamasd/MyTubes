@@ -17,7 +17,7 @@ class  VideoLauncher: UIViewController {
 //        showVideoPlayer()
     }
     
-    func showVideoPlayer()  {
+    func showVideoPlayer(video:VideoModel)  {
         
         if let window = UIApplication.shared.keyWindow {
             let views = UIView(frame: window.frame)

@@ -29,6 +29,7 @@ class HomeVC: BaseVC {
         //        aiv.hidesWhenStopped = true
         return ac
     }()
+    var videoPlayerView = VideoPlayerView()
     
     lazy var settingg:MoreSettingView = {
         let set = MoreSettingView()
@@ -69,9 +70,30 @@ class HomeVC: BaseVC {
         }
         cell.feedCollection.collectionView.reloadData()
         
-        cell.feedCollection.handleSelected = {[weak self] (video) in
-            let video = VideoLauncher()
-            video.showVideoPlayer()
+        cell.feedCollection.handleSelected = {[unowned self] (video) in
+//            let video = VideoLauncher()
+            
+            if let window = UIApplication.shared.keyWindow {
+                let views = UIView(frame: window.frame)
+                views.backgroundColor = .white
+                
+                views.frame = CGRect(x: window.frame.width - 10, y: window.frame.height - 10, width: 50, height: 50)
+                let height = window.frame.width * 9 / 16
+                let videoPlayerFrame = CGRect(x: 0, y: 0, width: window.frame.width, height: height)
+                self.videoPlayerView = VideoPlayerView(frame: videoPlayerFrame)
+                self.videoPlayerView.video = video
+                views.addSubview(self.videoPlayerView)
+                window.addSubview(views)
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    
+                    views.frame = window.frame
+                }, completion: { (_) in
+                    UIApplication.shared.isStatusBarHidden = true
+                    
+                })
+                
+                
+            }
         }
         
         return cell
