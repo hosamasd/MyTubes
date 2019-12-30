@@ -30,6 +30,9 @@ class HomeVC: BaseVC {
         return ac
     }()
     var videoPlayerView = VideoPlayerView()
+    var maximizeTopAnchorConstraint:NSLayoutConstraint!
+    var minimizeTopAnchorConstraint:NSLayoutConstraint!
+    var bottomAnchorConstraint:NSLayoutConstraint!
     
     lazy var settingg:MoreSettingView = {
         let set = MoreSettingView()
@@ -46,9 +49,6 @@ class HomeVC: BaseVC {
         fetchVideos()
     }
     
-//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return homeVideoArray.count
-//    }
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -71,12 +71,11 @@ class HomeVC: BaseVC {
         cell.feedCollection.collectionView.reloadData()
         
         cell.feedCollection.handleSelected = {[unowned self] (video) in
-//            let video = VideoLauncher()
             
             if let window = UIApplication.shared.keyWindow {
                 let views = UIView(frame: window.frame)
                 views.backgroundColor = .white
-                
+
                 views.frame = CGRect(x: window.frame.width - 10, y: window.frame.height - 10, width: 50, height: 50)
                 let height = window.frame.width * 9 / 16
                 let videoPlayerFrame = CGRect(x: 0, y: 0, width: window.frame.width, height: height)
@@ -85,14 +84,14 @@ class HomeVC: BaseVC {
                 views.addSubview(self.videoPlayerView)
                 window.addSubview(views)
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                    
+
                     views.frame = window.frame
                 }, completion: { (_) in
                     UIApplication.shared.isStatusBarHidden = true
-                    
+
                 })
-                
-                
+
+
             }
         }
         

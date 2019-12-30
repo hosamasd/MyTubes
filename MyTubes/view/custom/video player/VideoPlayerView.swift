@@ -13,7 +13,7 @@ class VideoPlayerView: UIView {
     
     var video :VideoModel? {
         didSet {
-            setupPalyervIEW()
+//            setupPalyervIEW()
         }
     }
     
@@ -29,8 +29,7 @@ class VideoPlayerView: UIView {
     }()
     let playeutton:UIButton = {
         let ai = UIButton()
-        ai.translatesAutoresizingMaskIntoConstraints = false
-        ai.setImage(#imageLiteral(resourceName: "play"), for: .normal)
+        ai.setImage(#imageLiteral(resourceName: "play").withRenderingMode(.alwaysOriginal), for: .normal)
         ai.addTarget(self, action: #selector(handlePlay), for: .touchUpInside)
         ai.isHidden = true
         ai.constrainWidth(constant: 50)
@@ -39,7 +38,7 @@ class VideoPlayerView: UIView {
     }()
     let mainContainerView:UIView = {
         let vi = UIView()
-        vi.backgroundColor = UIColor(white: 0, alpha: 1)
+        vi.backgroundColor = .red//UIColor(white: 0, alpha: 1)
         
         return vi
     }()
@@ -77,7 +76,7 @@ class VideoPlayerView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        setupPalyervIEW()
+        setupPalyervIEW()
         
         backgroundColor = .black
         

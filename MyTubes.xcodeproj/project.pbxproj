@@ -30,6 +30,7 @@
 		4EAADCFA23B769D600875350 /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAADCF923B769D600875350 /* APIServices.swift */; };
 		4EAC2D1C23B758F90088F117 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC2D1B23B758F90088F117 /* MenuBarView.swift */; };
 		4EAC2D1F23B759F80088F117 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC2D1E23B759F80088F117 /* MenuCell.swift */; };
+		4EC7823A23BA0B4300A2BDC0 /* VideoPayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC7823923BA0B4300A2BDC0 /* VideoPayer.swift */; };
 		4ED4667A23B8786A001C4439 /* HomesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED4667923B8786A001C4439 /* HomesCell.swift */; };
 		4ED4667C23B878BE001C4439 /* FeedCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED4667B23B878BE001C4439 /* FeedCollectionVC.swift */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,7 @@
 		4EAADCF923B769D600875350 /* APIServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServices.swift; sourceTree = "<group>"; };
 		4EAC2D1B23B758F90088F117 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 		4EAC2D1E23B759F80088F117 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		4EC7823923BA0B4300A2BDC0 /* VideoPayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPayer.swift; sourceTree = "<group>"; };
 		4ED4667923B8786A001C4439 /* HomesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomesCell.swift; sourceTree = "<group>"; };
 		4ED4667B23B878BE001C4439 /* FeedCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionVC.swift; sourceTree = "<group>"; };
 		CCBC6FDAC102AF3DE59F7DEF /* Pods-MyTubes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTubes.release.xcconfig"; path = "Target Support Files/Pods-MyTubes/Pods-MyTubes.release.xcconfig"; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			children = (
 				4E7A623D23B88FB8009BD355 /* VideoLauncher.swift */,
 				4E7A623A23B88DA9009BD355 /* VideoPlayerView.swift */,
+				4EC7823923BA0B4300A2BDC0 /* VideoPayer.swift */,
 			);
 			path = "video player";
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				4E7A623E23B88FB8009BD355 /* VideoLauncher.swift in Sources */,
 				4EAADCF523B767E100875350 /* VideoModel.swift in Sources */,
 				4E93425223B776BC000F5561 /* SettingCell.swift in Sources */,
+				4EC7823A23BA0B4300A2BDC0 /* VideoPayer.swift in Sources */,
 				4E8E018723B74A4A009F3299 /* BaseCell.swift in Sources */,
 				4E8E018923B74A78009F3299 /* FeedCell.swift in Sources */,
 				4EAADCF723B768B200875350 /* ChannelModel.swift in Sources */,
