@@ -76,25 +76,25 @@ class VideoPlayerView: UIView {
         
         return sl
     }()
-    lazy var titleLabel = UILabel(text: video?.title, font: .systemFont(ofSize: 20), textColor: .black)
-     lazy var numberOfViewsLabel = UILabel(text: "\(video?.numberOfViews)", font: .systemFont(ofSize: 18), textColor: .black)
+    lazy var titleLabel = UILabel(text: "fdghfdgd dfgdfgssdf", font: .systemFont(ofSize: 20), textColor: .black)
+     lazy var numberOfViewsLabel = UILabel(text: "dsfgdgdf dfgdf", font: .systemFont(ofSize: 18), textColor: .black)
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        setupPalyervIEW()
-        backgroundColor = .white
+        setupPalyervIEW()
+        
+        backgroundColor = .black
         
         setupViews()
-        setupPalyervIEW()
         addGradiantLayer()
     }
-     let gradiantLayer = CAGradientLayer()
     
     func addGradiantLayer()  {
         let gradiantLayer = CAGradientLayer()
         gradiantLayer.frame = bounds
         gradiantLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
         gradiantLayer.locations = [ 0,7, 1,2]
-        layer.addSublayer(gradiantLayer)
+        mainContainerView.layer.addSublayer(gradiantLayer)
     }
     
     func setupViews()  {
@@ -124,9 +124,7 @@ class VideoPlayerView: UIView {
         avPlayer = AVPlayer(url: url)
         let videoPlayers = AVPlayerLayer(player: avPlayer)
         self.layer.addSublayer(videoPlayers)
-//        let frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 350)
-        
-        videoPlayers.frame = mainContainerView.frame
+        videoPlayers.frame = self.frame
         
         avPlayer?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
         

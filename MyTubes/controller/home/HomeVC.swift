@@ -50,7 +50,7 @@ class HomeVC: BaseVC {
         super.viewDidLoad()
         setupMenu()
         fetchVideos()
-        setupVideoView()
+//        setupVideoView()
     }
     
     func setupVideoView()  {
@@ -76,21 +76,44 @@ class HomeVC: BaseVC {
         }
     }
     
-    func handleMaxmizePlayers(epoisde:VideoModel?,playlistEpoisdes:[VideoModel] = [])  {
-        
-        minimizeTopAnchorConstraint.isActive = false
-        maximizeTopAnchorConstraint.isActive = true
-        maximizeTopAnchorConstraint.constant = 0
-        leadingAnchorConstraint.constant = 0
-        
-        if epoisde != nil {
-            players.video = epoisde
+    func handleMaxmizePlayers()  {
+        if let window = UIApplication.shared.keyWindow {
+            let views = UIView(frame: window.frame)
+            views.backgroundColor = .white
+            
+            views.frame = CGRect(x: window.frame.width - 10, y: window.frame.height - 10, width: 50, height: 50)
+            let height = window.frame.width * 9 / 16
+            let videoPlayerFrame = CGRect(x: 0, y: 0, width: window.frame.width, height: height)
+            let videoPayerView = VideoPlayerView(frame: videoPlayerFrame)
+            
+            views.addSubview(videoPayerView)
+            window.addSubview(views)
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                
+                views.frame = window.frame
+            }, completion: { (completef) in
+                UIApplication.shared.isStatusBarHidden = true
+            })
+            
+            
         }
-//        players.playListEpoisdes = playlistEpoisdes
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
-            self.view.layoutIfNeeded()
-        })
     }
+    
+//    func handleMaxmizePlayers(epoisde:VideoModel?,playlistEpoisdes:[VideoModel] = [])  {
+//
+//        minimizeTopAnchorConstraint.isActive = false
+//        maximizeTopAnchorConstraint.isActive = true
+//        maximizeTopAnchorConstraint.constant = 0
+//        leadingAnchorConstraint.constant = 0
+//
+//        if epoisde != nil {
+//            players.video = epoisde
+//        }
+////        players.playListEpoisdes = playlistEpoisdes
+//        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
+//            self.view.layoutIfNeeded()
+//        })
+//    }
     
     //TODO:- HANDLE METHODS
     
@@ -128,7 +151,7 @@ class HomeVC: BaseVC {
         
         cell.feedCollection.handleSelected = {[unowned self] (video) in
             
-            self.handleMaxmizePlayers(epoisde: video)
+            self.handleMaxmizePlayers()
         }
         
         return cell
