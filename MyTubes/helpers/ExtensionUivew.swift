@@ -10,6 +10,16 @@ import UIKit
 
 extension UIView{
     
+    func getStack(views: UIView...,spacing:CGFloat, alignment: UIStackView.Alignment = .fill,distribution:UIStackView.Distribution,axis:NSLayoutConstraint.Axis) -> UIStackView {
+        let stack = UIStackView(arrangedSubviews: views)
+        stack.spacing = spacing
+        stack.distribution = distribution
+        stack.axis = axis
+        stack.alignment = alignment
+        return stack
+        
+    }
+    
     @discardableResult
     func anchor(top: NSLayoutYAxisAnchor?, leading: NSLayoutXAxisAnchor?, bottom: NSLayoutYAxisAnchor?, trailing: NSLayoutXAxisAnchor?, padding: UIEdgeInsets = .zero, size: CGSize = .zero) -> AnchoredConstraints {
         
